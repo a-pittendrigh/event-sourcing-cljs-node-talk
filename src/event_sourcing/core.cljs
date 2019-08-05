@@ -3,11 +3,6 @@
 
 (println "Hello world!" (.now js/Date))
 
-;; ADDED
-(defn average [a b]
-  (/ (+ a b) 2.0))
-
-
 
 (def fs (js/require "fs"))
 (defn write-to-file [event filename]
@@ -25,13 +20,23 @@
       (write-to-file event-store)))
 
 (defmulti apply-event
-  (fn [event] (:event-type event)))
+  (fn [projection event] (:event-type event)))
 
-(defmethod apply-event :record-reading [event]
-  )
+(defmethod apply-event :record-reading [projection event]
+  event)
 
-(defmethod apply-event :create-account [event]
-  )
+(defmethod apply-event :create-account [projection event]
+  (assoc projection :username (get-in event [:data :user])))
+
+(defmethod apply-event :add-reading [projection event]
+  (let [readings (:reading projection)
+        event    (select-keys event [:data])]
+    (assoc projection :readings (conj readings event))))
 
 (record-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
 (record-event {:event-type :add-reading :data {:user "a.pittendrigh@pm.me" :meter-reading 1000}})
+
+(prn "final ---->"
+ (-> {}
+     (apply-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
+     (apply-event {:event-type :add-reading :data {:user "a.pittendrigh@pm.me" :meter-reading 1000}})))
