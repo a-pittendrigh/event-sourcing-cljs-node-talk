@@ -1,4 +1,5 @@
-(ns event-sourcing.core)
+(ns event-sourcing.core
+  (:require [cljs.reader]))
 
 (println "Hello world!" (.now js/Date))
 
@@ -10,8 +11,8 @@
 
 (def fs (js/require "fs"))
 (defn write-to-file [event filename]
-  ;; (prn "writing " event " to file")
-  (.writeFile fs filename (clj->js (str event))
+  ;;(prn "writing " (assoc (js->clj (cljs.reader/read-string (str (clj->js event)))) :test "test") " to file")
+  (.appendFile fs filename (clj->js (str event))
               (fn [err] (if err
                           (println "error:" err)))))
 
@@ -32,5 +33,5 @@
 (defmethod apply-event :create-account [event]
   )
 
-;;(record-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
+(record-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
 (record-event {:event-type :add-reading :data {:user "a.pittendrigh@pm.me" :meter-reading 1000}})
