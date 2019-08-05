@@ -9,17 +9,18 @@
 
 
 (def fs (js/require "fs"))
-(defn write-to-file [content filename]
-  (.writeFile fs filename content
+(defn write-to-file [event filename]
+  ;; (prn "writing " event " to file")
+  (.writeFile fs filename (clj->js (str event))
               (fn [err] (if err
-                          (println "error:
-" err)))))
+                          (println "error:" err)))))
 
 (def event-store "events.txt")
 ;;this is not a map, so I cannot for now assoc onto it. the string needs to be converted to a map
 (defn record-event [event]
+  (prn (assoc event :timestamp (.now js/Date)))
   (-> event
-      (assoc event :timestamp (.now js/Date))
+      (assoc :timestamp (.now js/Date))
       (write-to-file event-store)))
 
 (defmulti apply-event
@@ -28,9 +29,8 @@
 (defmethod apply-event :record-reading [event]
   )
 
-(defmethod apply-event :create-account [event] )
+(defmethod apply-event :create-account [event]
+  )
 
-(write-to-file "Hello, World!" "test.txt")
-
-(record-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
+;;(record-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
 (record-event {:event-type :add-reading :data {:user "a.pittendrigh@pm.me" :meter-reading 1000}})
