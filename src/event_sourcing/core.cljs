@@ -5,16 +5,41 @@
 
 
 (def fs (js/require "fs"))
+
+(defn parse-event-log [events]
+  (cljs.reader/read-string events))
+
+(defn read-event-log [filename callback]
+  (let [default-callback (fn [err data]
+                           (if err
+                             (prn "Something went wrong" err)
+                             (prn (count (:events (parse-event-log data))))))
+        callback (or callback default-callback)]
+      (.readFile fs filename "utf8" callback)))
+
+
 (defn write-to-file [event filename]
-  ;;(prn "writing " (assoc (js->clj (cljs.reader/read-string (str (clj->js event)))) :test "test") " to file")
-  (.appendFile fs filename (clj->js (str event))
-              (fn [err] (if err
-                          (println "error:" err)))))
+  (read-event-log filename
+                  (fn [err data]
+                    (if err
+                      (prn "Something went wrong while reading the event log; " err)
+                      (let [events (parse-event-log data)
+                            events (conj events event)
+                            events (str events)]
+                        (.writeFile fs filename events
+                                     (fn [err]
+                                       (if err
+                                         (println
+                                          "Something went wrong writing the event log: " err)))))))))
 
 (def event-store "events.txt")
-;;this is not a map, so I cannot for now assoc onto it. the string needs to be converted to a map
+
+(comment
+  (read-event-log event-store)
+  (count (read-event-log event-store))
+  )
+
 (defn record-event [event]
-  (prn (assoc event :timestamp (.now js/Date)))
   (-> event
       (assoc :timestamp (.now js/Date))
       (write-to-file event-store)))
@@ -40,3 +65,16 @@
  (-> {}
      (apply-event {:event-type :create-account :data {:user "a.pitendrigh@pm.me"}})
      (apply-event {:event-type :add-reading :data {:user "a.pittendrigh@pm.me" :meter-reading 1000}})))
+
+
+(prn "sdkashdk")
+
+(let [event {:hello "there"}
+      events {:events [event event]}]
+  ;;(str (clj->js event))
+  (cljs.reader/read-string (str events))
+  (assoc (cljs.reader/read-string (str event)) :test "test")
+  ;;(clj->js event)
+  (str events)
+  (count (:events (cljs.reader/read-string (str events))))
+  )

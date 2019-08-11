@@ -1,1 +1,1 @@
-clj -m cljs.main --target node --output-to main.js -c evetn-sourcing.core
+clj -m cljs.main --target node --output-to main.js -c event-sourcing.core
