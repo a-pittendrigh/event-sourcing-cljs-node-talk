@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "source-map-support": "^0.5.12"
+  },
+  "devDependencies": {
+    "shadow-cljs": "^2.8.42"
   }
 }

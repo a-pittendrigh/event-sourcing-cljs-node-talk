@@ -1,0 +1,6 @@
+meter mate 
+
+record event
+-events we're going to record; :create-account (name, surname, location, starting reading) -> {CREATED, account-id}, :record-reading (account-id, datetime, reading) -> {CREATED}, :create-user (email, password) -> OK, :login (user-id) -> {OK, token} 
+
+replay events for an account, so that we can get a reading for the month 
