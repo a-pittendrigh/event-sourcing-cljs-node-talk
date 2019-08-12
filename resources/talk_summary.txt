@@ -1,0 +1,26 @@
+I'm going to provide a brief overview of my journey to functional programming, and my rationale behind picking Clojure as my language of choice.
+I will briefly talk about my perceived advantages and disadvantages of using Clojure.
+
+I'll try to briefly and gently show core Clojure concepts, and then we'll implement a rudimentary event sourcing engine using Clojure.
+
+The engine will borrow heavily from Redux so that participants have a common ground from which to build their understanding of what we're doing.
+
+Lastly, we'll run it on Node!
+
+I suspect I'll need approximately 30 minutes of talk time.
+
+===============
+My journey to functional programming
+
+- 
+===============
+Why Clojure(Script)?
+
+- Talk about my perceived advantages and disadvantages of using Clojure
+===============
+Into to ClojureScript
+
+- Implement a rudimentary event sourcing engine using ClojureScript (talk about how this related to Redux)
+===============
+Demo with the event sourcing engine, running on node.
+
