@@ -3,7 +3,6 @@
 
 (println "Hello world!" (.now js/Date))
 
-
 (def fs (js/require "fs"))
 
 (defn parse-event-log [events]
@@ -16,7 +15,6 @@
                              (prn (count (:events (parse-event-log data))))))
         callback (or callback default-callback)]
       (.readFile fs filename "utf8" callback)))
-
 
 (defn write-to-file [event filename]
   (read-event-log filename
