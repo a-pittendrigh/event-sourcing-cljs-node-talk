@@ -3,6 +3,18 @@ section ul.timeline li {
   position:relative
 }
 
+section ul.timeline li.disposition-bad{
+  color: red;
+}
+
+section ul.timeline li.disposition-good{
+  color: green;
+}
+
+section ul.timeline li span{
+  color: white;
+}
+
 section ul.timeline li span:before{
   content:'';
   position:absolute;
