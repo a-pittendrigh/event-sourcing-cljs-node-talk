@@ -1,0 +1,21 @@
+section ul.timeline li {
+  padding-bottom: 40px;
+  position:relative
+}
+
+section ul.timeline li span:before{
+  content:'';
+  position:absolute;
+  border-left:1px solid ;
+  left:-29px;
+  bottom:-35px;
+  z-index:-1;
+  height:100%
+}
+
+section ul.timeline li:last-child span:before{
+  content:none;
+}
+section ul.timeline li:last-child{
+  padding-bottom:0
+}
