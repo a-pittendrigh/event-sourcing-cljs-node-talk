@@ -5,3 +5,4 @@ out
 events.txt
 main.js
 test.txt
+.cljs_node_repl
