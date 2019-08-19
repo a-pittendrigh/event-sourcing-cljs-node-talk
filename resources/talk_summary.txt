@@ -10,7 +10,12 @@ Lastly, we'll run it on Node!
 I suspect I'll need approximately 30 minutes of talk time.
 
 ===============
-My journey to functional programming
+My journey to functional programming in ClojureScript
+
+(Show disposisition to JavaScript slide)
+Talk about how you got into JavaScript
+Talk about how dangerous state is
+When you get to the Entelect stuff, talk about React, Webpack, JSinSA, JoziJS, Kenneth, emacs, ramda, and Redux.
 
 - 
 ===============
