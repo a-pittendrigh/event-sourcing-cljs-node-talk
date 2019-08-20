@@ -6,3 +6,4 @@ events.txt
 main.js
 test.txt
 .cljs_node_repl
+.nrepl-port
