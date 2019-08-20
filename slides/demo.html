@@ -58,15 +58,15 @@
 				</section>
 				<section>
 					<h2>IIFE</h2>
-					<h3>(Immediately Invoked Function Expression)</h3>
+					Imediately Invoked Function Expression
 					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
-(function () {
+window.GLOBAL.thing = (function () {
     statements
 })();}
 					  </code></pre>
 				</section>
 				<section>
-					<h2>IIFE</h2>
+					IIFE classes
 					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
 var me = function(fn, sn) {
   return {
@@ -116,6 +116,7 @@ console.log(toFullName.fullName()); // H,e,l,l,o JoziJS
 				</code></pre>
 				</section>
 				<section>
+					Pure Functions
 					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
 const fullName = (name, surname) => name + ' ' + surname;
 console.log(fullName('Alexander', 'Pittendrigh'));
