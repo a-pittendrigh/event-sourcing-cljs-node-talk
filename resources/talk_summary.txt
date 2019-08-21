@@ -17,6 +17,18 @@ Talk about how you got into JavaScript
 Talk about how dangerous state is
 When you get to the Entelect stuff, talk about React, Webpack, JSinSA, JoziJS, Kenneth, emacs, ramda, and Redux.
 
+Why is functional purity important?
+Why is state so dangerous?
+Given an arbitrary collection of bits, each with a state of on or off, an array of 3 bits
+can have 8 possible states.
+
+
+[0 1
+ 0 1
+ 1 1] 2^3
+
+
+
 - 
 ===============
 Why Clojure(Script)?
