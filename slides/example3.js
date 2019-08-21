@@ -1,8 +1,11 @@
 // listener pattern
-const store = { accounts: [], getCurrentState: (username) => ({}) };
 
-const newMeterReading = (reading, username) => store.addMeterReading(reading, 'a.pittendrigh@gmail.com')
-const accountCreated = (email) => { email }
+const createStore = (accounts) => {
+    return {
+        getCurrentState: (username) => (accounts[username])
+    }
+}
+const store = createStore({ "a.pittendrigh@gmail.com": {} });
 
 const notifyOfChange = (listeners, event) => {
     console.log('==> Notifying Listeners');
