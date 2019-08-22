@@ -6,7 +6,6 @@
 (def fs (js/require "fs"))
 
 (defn parse-event-log [events]
-  (prn "in  parase")
   (cljs.reader/read-string events))
 
 (defn read-event-log [filename callback]
@@ -20,19 +19,16 @@
 (defn write-to-file [event filename]
   (read-event-log filename
                   (fn [err data]
-                    (prn "here")
                     (if err
                       (prn "Something went wrong while reading the event log; " err)
-                      (do
-                        (prn "here 2")
-                        (let [events (parse-event-log data)
+                      (let [events (parse-event-log data)
                             events (conj events event)
                             events (str events)]
                         (.writeFile fs filename events
-                                     (fn [err]
-                                       (if err
-                                         (println
-                                          "Something went wrong writing the event log: " err))))))))))
+                                    (fn [err]
+                                      (if err
+                                        (println
+                                         "Something went wrong writing the event log: " err)))))))))
 
 (def event-store "events.txt")
 
@@ -81,8 +77,10 @@
                                 (if err
                                   (prn "Something wen't wrong" err)
                                   (-> data
+                                      (parse-event-log)
+                                      (get-in [:data :meter-reading])
                                       (prn)))))
-  
+
   (.readFile fs event-store "utf8" (fn [err data]
                                   (if err
                                       (prn "Something wen't wrong" err)
